@@ -29,10 +29,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.ui.IconGenerator;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends ActionBarActivity
@@ -105,7 +107,8 @@ public class MainActivity extends ActionBarActivity
                 );
 
                 Log.d("TAG", "The total cursor count is " + cursor.getCount());
-
+                ArrayList<LatLng> points = new ArrayList<LatLng>();
+                Polyline line;
                 try {
                     while (cursor.moveToNext()) {
                         PolylineOptions polyLine = new PolylineOptions().color(
@@ -114,11 +117,23 @@ public class MainActivity extends ActionBarActivity
                         double lngi = Double.parseDouble(cursor.getString(cursor.getColumnIndex(SQLiteDBHelper.COLUMN_LONG)));
                         Log.d("TAG", "The cursor  is long" +cursor.getString(cursor.getColumnIndex(SQLiteDBHelper.COLUMN_LONG) ));
                         Log.d("TAG", "The cursor  is lat" +cursor.getString(cursor.getColumnIndex(SQLiteDBHelper.COLUMN_LAT) ));
-                        polyLine.add(new LatLng(lati, lngi));
+
+                        LatLng latLng = new LatLng(lati,lngi);
+                        points.add(latLng);
+
                     }
                 } finally {
                     cursor.close();
                 }
+                googleMap.clear();  //clears all Markers and Polylines
+
+                PolylineOptions options = new PolylineOptions().width(5).color(Color.BLUE).geodesic(true);
+                for (int i = 0; i < points.size(); i++) {
+                    LatLng point = points.get(i);
+                    options.add(point);
+                }
+                addMarker(); //add Marker in current position
+                line = googleMap.addPolyline(options);
 
             }
         });
@@ -215,6 +230,11 @@ public class MainActivity extends ActionBarActivity
         values.put(SQLiteDBHelper.COLUMN_LONG, mCurrentLocation.getLongitude());
         values.put(SQLiteDBHelper.COLUMN_TIME, mLastUpdateTime.toString());
         long newRowId = database.insert(SQLiteDBHelper.TABLE_NAME, null, values);
+         values = new ContentValues();
+        values.put(SQLiteDBHelper.COLUMN_LAT, mCurrentLocation.getLatitude()+1.4);
+        values.put(SQLiteDBHelper.COLUMN_LONG, mCurrentLocation.getLongitude()+1.4);
+        values.put(SQLiteDBHelper.COLUMN_TIME, mLastUpdateTime.toString());
+         newRowId = database.insert(SQLiteDBHelper.TABLE_NAME, null, values);
 
 
     }
