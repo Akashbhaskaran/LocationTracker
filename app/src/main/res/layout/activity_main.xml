@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        class="com.google.android.gms.maps.SupportMapFragment">
+
+   <!-- <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:gravity="right"
+        android:id="@+id/reset"
+
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="Overview"
+        android:id="@+id/overview"
+       />-->
+    </fragment>
+    <RelativeLayout
+        android:id="@+id/belowlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/overview"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="left|center_horizontal"
+            android:background="#359c5e"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="14dp"
+            android:text="Overview"
+            android:textColor="#ffffff" />
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right|center_horizontal"
+            android:background="#359c5e"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="14dp"
+            android:text="Reset"
+            android:textColor="#ffffff" />
+
+</RelativeLayout>
+</RelativeLayout>
