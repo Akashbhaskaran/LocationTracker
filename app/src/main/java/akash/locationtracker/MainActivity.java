@@ -230,11 +230,7 @@ public class MainActivity extends ActionBarActivity
         values.put(SQLiteDBHelper.COLUMN_LONG, mCurrentLocation.getLongitude());
         values.put(SQLiteDBHelper.COLUMN_TIME, mLastUpdateTime.toString());
         long newRowId = database.insert(SQLiteDBHelper.TABLE_NAME, null, values);
-         values = new ContentValues();
-        values.put(SQLiteDBHelper.COLUMN_LAT, mCurrentLocation.getLatitude()+1.4);
-        values.put(SQLiteDBHelper.COLUMN_LONG, mCurrentLocation.getLongitude()+1.4);
-        values.put(SQLiteDBHelper.COLUMN_TIME, mLastUpdateTime.toString());
-         newRowId = database.insert(SQLiteDBHelper.TABLE_NAME, null, values);
+      
 
 
     }
